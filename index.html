@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feed My Sheep Ministry</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --green-deep: #1b4d2e;
+  --green-mid: #2e7d32;
+  --green-bright: #43a047;
+  --green-light: #c8e6c9;
+  --green-pale: #f1f8f2;
+  --gold: #c9a84c;
+  --gold-light: #f5ecd4;
+  --gold-pale: #fdf8ee;
+  --white: #ffffff;
+  --ink: #1a2e1c;
+  --muted: #6b8c71;
+  --border: #d4e8d6;
+  --border-gold: #e8d9ae;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--white);
+  color: var(--ink);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── HEADER ── */
+header {
+  background: linear-gradient(160deg, #1b4d2e 0%, #2e7d32 55%, #3d8b41 100%);
+  padding: 52px 24px 44px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 60% 30%, rgba(255,255,255,0.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.logo-wrap {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Cross-only logo, fully inline SVG — no sheep */
+.logo-cross {
+  filter: drop-shadow(0 4px 14px rgba(0,0,0,0.25));
+}
+
+h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3.2rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.03em;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.18);
+}
+
+.tagline {
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.72);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-top: 6px;
+  font-weight: 400;
+}
+
+/* ── NAV ── */
+nav {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding: 20px 20px;
+  flex-wrap: wrap;
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 16px rgba(27,77,46,0.07);
+}
+
+.nav-btn {
+  border: none;
+  padding: 10px 24px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--green-mid), var(--green-bright));
+  color: rgba(255,255,255,0.88);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  font-size: 0.92rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  letter-spacing: 0.02em;
+  box-shadow: 0 4px 14px rgba(46,125,50,0.18);
+}
+.nav-btn:hover, .nav-btn.active {
+  background: linear-gradient(135deg, var(--green-deep), var(--green-bright));
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(46,125,50,0.32);
+  transform: translateY(-1px);
+}
+.nav-btn.contact-btn {
+  background: transparent;
+  border: 2px solid var(--green-mid);
+  color: var(--green-mid);
+  box-shadow: none;
+}
+.nav-btn.contact-btn:hover {
+  background: var(--green-mid);
+  color: white;
+}
+
+/* ── PAGES ── */
+.wrap { max-width: 900px; margin: 0 auto; padding: 52px 24px 90px; }
+
+.page { display: none; }
+.page.active { display: block; animation: fadeUp 0.45s ease forwards; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── SECTION TITLE ── */
+.section-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+.section-header h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.7rem;
+  font-weight: 700;
+  color: var(--green-deep);
+  line-height: 1.2;
+}
+.section-header .underline {
+  display: inline-block;
+  width: 60px;
+  height: 3px;
+  border-radius: 99px;
+  background: linear-gradient(90deg, var(--green-mid), var(--green-bright));
+  margin-top: 12px;
+}
+
+/* ── MISSION PAGE ── */
+.verse-hero {
+  text-align: center;
+  padding: 36px 32px 30px;
+  background: linear-gradient(135deg, #1b4d2e 0%, #2e7d32 100%);
+  border-radius: 24px;
+  margin-bottom: 32px;
+  position: relative;
+  overflow: hidden;
+}
+.verse-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 70% 20%, rgba(255,255,255,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+.verse-hero blockquote {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1.35rem;
+  line-height: 1.8;
+  color: rgba(255,255,255,0.92);
+  max-width: 680px;
+  margin: 0 auto;
+}
+.verse-hero cite {
+  display: block;
+  margin-top: 14px;
+  font-family: 'DM Sans', sans-serif;
+  font-style: normal;
+  font-size: 0.82rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+}
+.verse-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1.15rem;
+  color: var(--green-mid);
+  text-align: center;
+  margin-bottom: 28px;
+  font-weight: 600;
+}
+
+.mission-card {
+  background: var(--green-pale);
+  border: 1.5px solid var(--border);
+  border-radius: 22px;
+  padding: 40px 44px;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 28px;
+}
+.mission-cross-deco {
+  position: absolute;
+  top: -8px;
+  right: 20px;
+  width: 70px;
+  height: 90px;
+  pointer-events: none;
+  opacity: 0.14;
+}
+.mission-card p {
+  font-size: 1.1rem;
+  line-height: 2;
+  color: var(--ink);
+  font-weight: 300;
+  max-width: 700px;
+}
+.mission-card p strong {
+  color: var(--green-mid);
+  font-weight: 600;
+}
+.mission-card h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--green-deep);
+  margin-bottom: 10px;
+}
+.mission-card .card-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--green-bright);
+  margin-bottom: 12px;
+}
+.mission-card blockquote {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--muted);
+  border-left: 3px solid var(--green-light);
+  padding-left: 16px;
+  margin: 18px 0 0;
+}
+.mission-card ul {
+  margin: 12px 0 0 18px;
+}
+.mission-card ul li {
+  font-size: 1.05rem;
+  line-height: 1.85;
+  color: var(--ink);
+  font-weight: 300;
+  margin-bottom: 8px;
+}
+.mission-card ul li strong {
+  color: var(--green-mid);
+  font-weight: 600;
+}
+
+.mission-btn {
+  display: inline-block;
+  margin-top: 22px;
+  padding: 12px 28px;
+  background: linear-gradient(135deg, var(--green-mid), var(--green-bright));
+  color: white;
+  border: none;
+  border-radius: 999px;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.22s ease;
+  box-shadow: 0 4px 14px rgba(46,125,50,0.22);
+}
+.mission-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(46,125,50,0.32);
+}
+
+/* ── ROADMAP ── */
+.roadmap-wrap {
+  position: relative;
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+.roadmap-svg-wrap {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 0;
+  width: 60px;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.steps-list {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.step {
+  display: flex;
+  align-items: flex-start;
+  padding: 18px 0;
+}
+.step:nth-child(odd) {
+  flex-direction: row;
+  padding-right: calc(50% + 40px);
+}
+.step:nth-child(even) {
+  flex-direction: row-reverse;
+  padding-left: calc(50% + 40px);
+}
+
+.step-card {
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: 18px;
+  padding: 20px 24px;
+  box-shadow: 0 6px 20px rgba(27,77,46,0.07);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  flex: 1;
+}
+.step-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 32px rgba(27,77,46,0.13);
+}
+
+.step-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--green-bright);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+.step-card p {
+  font-size: 0.96rem;
+  line-height: 1.65;
+  color: var(--ink);
+  font-weight: 400;
+}
+
+.step-last .step-card {
+  background: linear-gradient(135deg, var(--green-deep), var(--green-bright));
+  border-color: transparent;
+  text-align: center;
+}
+.step-last .step-card p {
+  color: white;
+  font-size: 1.05rem;
+  font-weight: 600;
+  font-family: 'Cormorant Garamond', serif;
+}
+.step-last .step-num { color: rgba(255,255,255,0.65); }
+
+.roadmap-end {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+  padding-top: 4px;
+  padding-bottom: 20px;
+}
+.roadmap-end-line {
+  width: 3px;
+  height: 28px;
+  background: #43a047;
+  opacity: 0.5;
+  border-radius: 2px;
+}
+
+/* ── MEMBERS PAGE ── */
+.members-section-label {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: var(--green-deep);
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.members-section-label.founders-label {
+  color: #7a5c1e;
+  border-color: var(--border-gold);
+}
+
+.members-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+  margin-bottom: 48px;
+}
+
+.member-card {
+  background: var(--green-pale);
+  border: 1.5px solid var(--border);
+  border-radius: 22px;
+  padding: 28px 26px 36px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.member-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 36px rgba(27,77,46,0.11);
+}
+.member-card.founder-card {
+  background: var(--gold-pale);
+  border-color: var(--border-gold);
+}
+.member-card.founder-card:hover {
+  box-shadow: 0 16px 36px rgba(180,140,50,0.13);
+}
+.member-card.jesus-card {
+  background: linear-gradient(135deg, #fdf8ee 0%, #f5ecd4 100%);
+  border: 2px solid var(--gold);
+  grid-column: 1 / -1;
+}
+.member-card.placeholder-card {
+  background: var(--white);
+  border: 2px dashed var(--border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 36px 24px;
+}
+
+.member-cross-deco {
+  position: absolute;
+  bottom: 8px;
+  right: 14px;
+  width: 28px;
+  height: 36px;
+  opacity: 0.13;
+  pointer-events: none;
+}
+.founder-card .member-cross-deco { opacity: 0.18; }
+
+.member-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--green-deep);
+  margin-bottom: 10px;
+}
+.founder-card .member-name { color: #6b4c14; }
+.jesus-card .member-name {
+  font-size: 1.8rem;
+  color: #7a5c1e;
+}
+
+.member-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--green-mid), var(--green-bright));
+  color: white;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 999px;
+  margin-bottom: 12px;
+}
+.founder-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, #b8860b, var(--gold));
+  color: white;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 999px;
+  margin-bottom: 12px;
+}
+.jesus-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, #c9a84c, #e6c97a);
+  color: #5c3d0a;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 4px 14px;
+  border-radius: 999px;
+  margin-bottom: 14px;
+}
+
+.member-about {
+  font-size: 0.93rem;
+  line-height: 1.78;
+  color: #4a6550;
+  font-weight: 300;
+}
+.founder-card .member-about { color: #5e4218; }
+.jesus-card .member-about {
+  color: #6b4c14;
+  font-size: 0.97rem;
+}
+
+.placeholder-icon {
+  margin-bottom: 16px;
+  opacity: 0.35;
+}
+.placeholder-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+.placeholder-sub {
+  font-size: 0.88rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* ── SUPPORT PAGE ── */
+.support-intro {
+  text-align: center;
+  margin-bottom: 40px;
+}
+.support-intro .big-quote {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.45rem;
+  font-style: italic;
+  color: var(--green-deep);
+  line-height: 1.7;
+  margin-bottom: 18px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.support-intro p {
+  font-size: 1rem;
+  color: var(--muted);
+  margin-bottom: 16px;
+}
+
+.support-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.support-card {
+  background: var(--green-pale);
+  border: 1.5px solid var(--border);
+  border-radius: 22px;
+  padding: 34px 38px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.support-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(27,77,46,0.1);
+}
+.support-card h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--green-deep);
+  margin-bottom: 10px;
+}
+.support-card p {
+  font-size: 0.97rem;
+  line-height: 1.85;
+  color: var(--ink);
+  font-weight: 300;
+}
+.support-card blockquote {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--muted);
+  border-left: 3px solid var(--green-light);
+  padding-left: 16px;
+  margin-top: 16px;
+}
+.support-card .card-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--green-bright);
+  margin-bottom: 10px;
+}
+.support-cross-deco {
+  position: absolute;
+  top: -8px;
+  right: 20px;
+  width: 60px;
+  height: 80px;
+  pointer-events: none;
+  opacity: 0.12;
+}
+
+/* ── CONTACT PAGE ── */
+.contact-hero {
+  text-align: center;
+  margin-bottom: 44px;
+}
+.contact-hero p {
+  font-size: 1.05rem;
+  color: var(--muted);
+  line-height: 1.8;
+  max-width: 560px;
+  margin: 0 auto;
+}
+.contact-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+  max-width: 620px;
+  margin: 0 auto 48px;
+}
+.contact-card {
+  background: var(--green-pale);
+  border: 1.5px solid var(--border);
+  border-radius: 22px;
+  padding: 32px 28px;
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.contact-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 30px rgba(27,77,46,0.1);
+}
+.contact-card svg { margin-bottom: 16px; }
+.contact-card h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--green-deep);
+  margin-bottom: 8px;
+}
+.contact-card a {
+  color: var(--green-mid);
+  font-weight: 500;
+  font-size: 0.88rem;
+  text-decoration: none;
+  word-break: break-all;
+  display: block;
+}
+.contact-card a:hover { text-decoration: underline; }
+.contact-card p { color: var(--muted); font-size: 0.85rem; margin-top: 6px; }
+
+/* ── FOOTER ── */
+footer {
+  text-align: center;
+  padding: 28px 16px;
+  color: var(--muted);
+  font-size: 0.82rem;
+  letter-spacing: 0.05em;
+  border-top: 1px solid var(--border);
+  background: var(--green-pale);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 620px) {
+  .members-grid { grid-template-columns: 1fr; }
+  .member-card.jesus-card { grid-column: auto; }
+  .contact-cards { grid-template-columns: 1fr; }
+  .step:nth-child(odd) { flex-direction: column; padding-right: 0; padding-left: 68px; }
+  .step:nth-child(even) { flex-direction: column; padding-left: 68px; }
+  .mission-card { padding: 28px 22px; }
+  .support-card { padding: 26px 22px; }
+  h1 { font-size: 2.2rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER — cross logo only, no sheep -->
+<header>
+  <div class="logo-wrap">
+    <!-- Minimal 2D cross, inline SVG, no sheep -->
+    <svg class="logo-cross" width="80" height="96" viewBox="0 0 80 96" xmlns="http://www.w3.org/2000/svg" aria-label="Cross logo">
+      <line x1="40" y1="8" x2="40" y2="88" stroke="rgba(255,255,255,0.90)" stroke-width="14" stroke-linecap="round"/>
+      <line x1="12" y1="30" x2="68" y2="30" stroke="rgba(255,255,255,0.90)" stroke-width="14" stroke-linecap="round"/>
+    </svg>
+    <div>
+      <h1>Feed My Sheep</h1>
+      <p class="tagline">John 21:17 &nbsp;&middot;&nbsp; Sharing His Love</p>
+    </div>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav>
+  <button class="nav-btn active" onclick="showPage('mission', this)">Our Mission</button>
+  <button class="nav-btn" onclick="showPage('roadmap', this)">Roadmap</button>
+  <button class="nav-btn" onclick="showPage('members', this)">Members</button>
+  <button class="nav-btn" onclick="showPage('support', this)">Support Our Work</button>
+  <button class="nav-btn contact-btn" onclick="showPage('contact', this)">Contact Us</button>
+</nav>
+
+<div class="wrap">
+
+  <!-- ══ OUR MISSION ══ -->
+  <section id="mission" class="page active">
+    <div class="section-header">
+      <h2>Our Mission</h2>
+      <span class="underline"></span>
+    </div>
+
+    <div class="verse-hero">
+      <blockquote>
+        "He said to him the third time, 'Simon, son of John, do you love me?' Peter said to him, 'Lord, you know everything; you know that I love you.' Jesus said to him, 'Feed my sheep.'"
+      </blockquote>
+      <cite>— John 21:17</cite>
+    </div>
+
+    <p class="verse-sub">This is how we reach His Sheep.</p>
+
+    <!-- Mission statement -->
+    <div class="mission-card" style="margin-bottom:28px;">
+      <svg class="mission-cross-deco" viewBox="0 0 70 90" xmlns="http://www.w3.org/2000/svg">
+        <line x1="35" y1="5" x2="35" y2="85" stroke="#1b4d2e" stroke-width="13" stroke-linecap="round"/>
+        <line x1="8" y1="28" x2="62" y2="28" stroke="#1b4d2e" stroke-width="13" stroke-linecap="round"/>
+      </svg>
+      <p>We exist to share the Gospel of Jesus Christ with every person we encounter, driven by the belief that <strong>no one is too lost, too broken, or too far gone</strong> for the love of God. We go not out of obligation, but out of <strong>overflowing joy</strong> for what He has done in our own lives, seeking to encourage the discouraged, walk with the hurting, and lead others toward the peace found only in Christ. With humility and boldness, we strive to make every word and action a reflection of His goodness so that hearts may be softened, lives renewed, and <strong>His kingdom grown one soul at a time.</strong></p>
+    </div>
+
+    <!-- The Need -->
+    <div class="mission-card">
+      <svg class="mission-cross-deco" viewBox="0 0 70 90" xmlns="http://www.w3.org/2000/svg">
+        <line x1="35" y1="5" x2="35" y2="85" stroke="#1b4d2e" stroke-width="13" stroke-linecap="round"/>
+        <line x1="8" y1="28" x2="62" y2="28" stroke="#1b4d2e" stroke-width="13" stroke-linecap="round"/>
+      </svg>
+      <div class="card-label">The Need — Why We Go</div>
+      <h3>The Harvest Is Plentiful, But The Laborers Are Few</h3>
+      <blockquote>"Therefore go and make disciples of all nations, baptizing them in the name of the Father and of the Son and of the Holy Spirit, and teaching them to obey everything I have commanded you." — Matthew 28:19–20</blockquote>
+      <p style="margin-top:18px;">Our world is filled with people searching for hope, identity, and a home. Whether they are students on a campus, individuals navigating life on the street, or people in your own neighborhood who feel broken and overlooked, they are all hungry for the truth of the Gospel. We are not waiting for them to walk into a building. We are taking the love of Christ directly to the places where they live, struggle, and breathe. This is not a project. It is a promise to never look away from the people Jesus came to save. <strong>May the Lamb receive the reward of his suffering.</strong></p>
+    </div>
+
+    <!-- What We Do -->
+    <div class="mission-card">
+      <svg class="mission-cross-deco" viewBox="0 0 70 90" xmlns="http://www.w3.org/2000/svg">
+        <line x1="35" y1="5" x2="35" y2="85" stroke="#1b4d2e" stroke-width="13" stroke-linecap="round"/>
+        <line x1="8" y1="28" x2="62" y2="28" stroke="#1b4d2e" stroke-width="13" stroke-linecap="round"/>
+      </svg>
+      <div class="card-label">What We Do — The Operational Reality</div>
+      <h3>Intentional Ministry, Measured Impact</h3>
+      <blockquote>"I am the vine; you are the branches. If you remain in me and I in you, you will bear much fruit; apart from me you can do nothing." — John 15:5</blockquote>
+      <p style="margin-top:18px;">Without God, we are nothing. What we set out to do is for Him and through Him.</p>
+      <p style="margin-top:12px;">We bridge the gap between initial outreach and long-term discipleship through a model designed for every person we encounter. We do not use a one-size-fits-all approach. We meet people where they are through targeted engagement:</p>
+      <ul style="margin-top:16px;">
+        <li><strong>Tactical Outreach:</strong> We distribute curated Outreach Kits. Whether we are on a college campus, a city street, or a park, we carry the right resources to meet the moment. Our kits are designed to serve everyone from those in physical need to those seeking purpose or navigating personal crises. Every kit contains both physical and informational resources alongside the good news of Jesus.</li>
+        <li><strong>Relational Discipleship:</strong> We do not just hand out items and leave. We are trained to sit, listen, and build genuine rapport. We create a safe space for people to share their stories and hear the life-changing truth of Christ.</li>
+        <li><strong>Bridge to the Body:</strong> We view ourselves as a gateway ministry. Our goal is to connect those we meet with local, Bible-believing churches that can provide the community, mentorship, and support needed for lasting life change.</li>
+      </ul>
+    </div>
+
+    <!-- Partner With Us — as requested -->
+    <div class="mission-card">
+      <svg class="mission-cross-deco" viewBox="0 0 70 90" xmlns="http://www.w3.org/2000/svg">
+        <line x1="35" y1="5" x2="35" y2="85" stroke="#1b4d2e" stroke-width="13" stroke-linecap="round"/>
+        <line x1="8" y1="28" x2="62" y2="28" stroke="#1b4d2e" stroke-width="13" stroke-linecap="round"/>
+      </svg>
+      <div class="card-label">Our Ask — Support &amp; Fundraising</div>
+      <h3>Partner With Us In The Harvest</h3>
+      <blockquote>"How, then, can they call on the one they have not believed in? And how can they believe in the one of whom they have not heard? And how can they hear without someone preaching to them? And how can anyone preach unless they are sent? As it is written: 'How beautiful are the feet of those who bring good news!'" — Romans 10:14–15</blockquote>
+      <p style="margin-top:18px;font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;color:var(--green-deep);">Will you send us?</p>
+      <p style="margin-top:10px;">We are looking for partner churches and gospel partners to help us sustain this mission. We do not want to be an isolated island — we want to be a resource that helps the entire body of Christ become more active in the mission field.</p>
+      <ul style="margin-top:16px;">
+        <li><strong>Equip the Mission:</strong> We are raising support to stock our Outreach Kits. A gift of $25 allows us to assemble a kit tailored to the specific needs of the person we meet, ensuring we always have a Bible and the right resources ready to go.</li>
+        <li><strong>Mobilize the Church:</strong> We want to partner with your congregation. We provide the logistics, the safety protocols, and the training. You provide the hearts and the hands. We are ready to host evangelism training workshops for your youth and adult groups to get them equipped for the front lines of every mission field.</li>
+      </ul>
+      <button class="mission-btn" onclick="showPage('support', document.querySelectorAll('.nav-btn')[3])">See How to Support Us</button>
+    </div>
+
+  </section>
+
+  <!-- ══ ROADMAP ══ -->
+  <section id="roadmap" class="page">
+    <div class="section-header">
+      <h2>Roadmap</h2>
+      <span class="underline"></span>
+      <p style="color:var(--muted);margin-top:10px;font-size:0.95rem;">Where God is taking us, step by step.</p>
+    </div>
+
+    <div class="roadmap-wrap" id="roadmapWrap">
+      <div class="roadmap-svg-wrap" id="svgWrap"></div>
+
+      <div class="steps-list" id="stepsList">
+        <div class="step">
+          <div class="step-card">
+            <div class="step-num">Step 01</div>
+            <p>Meet with <strong>Anchor Point Church</strong> to share our vision, discuss our plans, and seek the support and covering we need to move forward in faith.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-card">
+            <div class="step-num">Step 02</div>
+            <p>Reach out to <strong>pastors and churches</strong> we already have relationships with, casting the vision and building a network of like-minded believers ready to move.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-card">
+            <div class="step-num">Step 03</div>
+            <p><strong>Document our next evangelism day</strong> — capturing stories, moments, and the fruit of stepping out in faith so others can see what God is doing.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-card">
+            <div class="step-num">Step 04</div>
+            <p>Produce a <strong>short documentary</strong> from our evangelism day to share with partner churches — inspiring others to go and do likewise.</p>
+          </div>
+        </div>
+        <div class="step step-last">
+          <div class="step-card">
+            <div class="step-num">Step 05 &middot; The Goal</div>
+            <p>Spread God's Love — and watch Him do exceedingly abundantly above all we could ask or imagine.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="roadmap-end">
+        <div class="roadmap-end-line"></div>
+        <!-- Cross at the end of the roadmap -->
+        <svg width="52" height="66" viewBox="0 0 52 66" xmlns="http://www.w3.org/2000/svg" aria-label="Cross">
+          <line x1="26" y1="5" x2="26" y2="61" stroke="#2e7d32" stroke-width="7" stroke-linecap="round"/>
+          <line x1="7" y1="21" x2="45" y2="21" stroke="#2e7d32" stroke-width="7" stroke-linecap="round"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ MEMBERS ══ -->
+  <section id="members" class="page">
+    <div class="section-header">
+      <h2>Members</h2>
+      <span class="underline"></span>
+      <p style="color:var(--muted);margin-top:10px;font-size:0.95rem;">The people God has gathered for this mission.</p>
+    </div>
+
+    <!-- Founders -->
+    <div class="members-section-label founders-label">
+      <!-- Inline cross icon, no image dependency -->
+      <svg width="22" height="28" viewBox="0 0 22 28" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <line x1="11" y1="2" x2="11" y2="26" stroke="#c9a84c" stroke-width="4" stroke-linecap="round"/>
+        <line x1="2" y1="9" x2="20" y2="9" stroke="#c9a84c" stroke-width="4" stroke-linecap="round"/>
+      </svg>
+      Founders
+    </div>
+
+    <div class="members-grid">
+
+      <!-- Jesus Christ — spans full width -->
+      <div class="member-card jesus-card">
+        <svg class="member-cross-deco" style="width:38px;height:48px;opacity:0.22;" viewBox="0 0 28 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <line x1="14" y1="3" x2="14" y2="33" stroke="#c9a84c" stroke-width="5" stroke-linecap="round"/>
+          <line x1="3" y1="11" x2="25" y2="11" stroke="#c9a84c" stroke-width="5" stroke-linecap="round"/>
+        </svg>
+        <span class="jesus-badge">Chief Cornerstone</span>
+        <div class="member-name" style="font-size:1.9rem;">Jesus Christ</div>
+        <p class="member-about">Son of God. Jesus inspired the entire group. None of us would be here without him (literally). He holds all of us together and provides for us every day! We love Jesus!</p>
+      </div>
+
+      <!-- Breanna Funk -->
+      <div class="member-card founder-card">
+        <svg class="member-cross-deco" viewBox="0 0 28 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <line x1="14" y1="3" x2="14" y2="33" stroke="#c9a84c" stroke-width="5" stroke-linecap="round"/>
+          <line x1="3" y1="11" x2="25" y2="11" stroke="#c9a84c" stroke-width="5" stroke-linecap="round"/>
+        </svg>
+        <span class="founder-badge">Founder</span>
+        <div class="member-name">Breanna Funk</div>
+        <p class="member-about">Breanna Funk is a devoted follower of Christ driven by a singular passion to make the sacrifice and Lordship of Jesus known where His name is not yet heard. Rooted in the belief that authentic, God-led relationships are the primary vessel for transformation, she seeks to love others as God loves us, knowing that His kindness leads to repentance. Her heart for the Great Commission has led her across diverse landscapes, from local outreach in Colorado and the streets of Las Vegas to missions among the nations, where she focuses on sharing the hope of the Gospel through relational ministry. Currently based in Colorado Springs, Breanna serves alongside her husband, Stefan Funk, dedicated to building a ministry of presence and pouring into their local community. Her ultimate prayer is that her life would be a living testimony that points others toward Jesus, ensuring that His name is glorified in all she does.</p>
+      </div>
+
+      <!-- Gabby Moore -->
+      <div class="member-card founder-card">
+        <svg class="member-cross-deco" viewBox="0 0 28 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <line x1="14" y1="3" x2="14" y2="33" stroke="#c9a84c" stroke-width="5" stroke-linecap="round"/>
+          <line x1="3" y1="11" x2="25" y2="11" stroke="#c9a84c" stroke-width="5" stroke-linecap="round"/>
+        </svg>
+        <span class="founder-badge">Founder</span>
+        <div class="member-name">Gabby Moore</div>
+        <p class="member-about">18 years old, born and raised in the beautiful state of Colorado. Gabby has always carried a deep heart for the homeless and those the world tends to overlook. She fully surrendered her life to Jesus at the age of 15 and hasn't looked back since. She loves the outdoors, staying active, and living life to the fullest for His glory.</p>
+      </div>
+
+      <!-- Micah Hartfield -->
+      <div class="member-card founder-card">
+        <svg class="member-cross-deco" viewBox="0 0 28 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <line x1="14" y1="3" x2="14" y2="33" stroke="#c9a84c" stroke-width="5" stroke-linecap="round"/>
+          <line x1="3" y1="11" x2="25" y2="11" stroke="#c9a84c" stroke-width="5" stroke-linecap="round"/>
+        </svg>
+        <span class="founder-badge">Founder</span>
+        <div class="member-name">Micah Hartfield</div>
+        <p class="member-about">19 years old and a lifelong follower of Christ. In 2025, Micah took a bold step of faith and attended Bible School in England, deepening his roots in the Word and his love for God. He's passionate about Colorado, about people, and about boldly sharing his faith wherever life takes him.</p>
+      </div>
+
+      <!-- Stefan Funk -->
+      <div class="member-card founder-card">
+        <svg class="member-cross-deco" viewBox="0 0 28 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <line x1="14" y1="3" x2="14" y2="33" stroke="#c9a84c" stroke-width="5" stroke-linecap="round"/>
+          <line x1="3" y1="11" x2="25" y2="11" stroke="#c9a84c" stroke-width="5" stroke-linecap="round"/>
+        </svg>
+        <span class="founder-badge">Founder</span>
+        <div class="member-name">Stefan Funk</div>
+        <p class="member-about">Stefan Funk is a 24-year-old dedicated to sharing the hope of Christ with anyone he meets. Having lived in Germany, Mexico, and the United States, he has learned that while languages and cultures may differ, every person is human and deeply loved by God. Alongside his wife, Breanna Funk, he is passionate about building genuine connections and walking with those who are searching for purpose. Together, they strive to lead people toward the transformative light, peace, and freedom that can only be found in Jesus.</p>
+      </div>
+
+    </div>
+
+    <!-- Regular Members -->
+    <div class="members-section-label" style="margin-top:8px;">
+      <svg width="22" height="28" viewBox="0 0 22 28" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <line x1="11" y1="2" x2="11" y2="26" stroke="#2e7d32" stroke-width="4" stroke-linecap="round"/>
+        <line x1="2" y1="9" x2="20" y2="9" stroke="#2e7d32" stroke-width="4" stroke-linecap="round"/>
+      </svg>
+      Members
+    </div>
+
+    <div class="members-grid">
+      <div class="member-card placeholder-card">
+        <svg class="placeholder-icon" width="40" height="52" viewBox="0 0 40 52" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <line x1="20" y1="4" x2="20" y2="48" stroke="#6b8c71" stroke-width="6" stroke-linecap="round"/>
+          <line x1="4" y1="16" x2="36" y2="16" stroke="#6b8c71" stroke-width="6" stroke-linecap="round"/>
+        </svg>
+        <div class="placeholder-title">Do you love Jesus?</div>
+        <p class="placeholder-sub">You could be the next member of Feed My Sheep! If you feel called to share the Gospel and want to labor alongside us, we'd love to meet you.</p>
+        <button class="mission-btn" style="margin-top:18px;" onclick="showPage('contact', null)">Get In Touch</button>
+      </div>
+      <div class="member-card placeholder-card">
+        <svg class="placeholder-icon" width="40" height="52" viewBox="0 0 40 52" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <line x1="20" y1="4" x2="20" y2="48" stroke="#6b8c71" stroke-width="6" stroke-linecap="round"/>
+          <line x1="4" y1="16" x2="36" y2="16" stroke="#6b8c71" stroke-width="6" stroke-linecap="round"/>
+        </svg>
+        <div class="placeholder-title">Do you love Jesus?</div>
+        <p class="placeholder-sub">You could be the next member of Feed My Sheep! If you feel called to share the Gospel and want to labor alongside us, we'd love to meet you.</p>
+        <button class="mission-btn" style="margin-top:18px;" onclick="showPage('contact', null)">Get In Touch</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ SUPPORT ══ -->
+  <section id="support" class="page">
+    <div class="section-header">
+      <h2>Support Our Work</h2>
+      <span class="underline"></span>
+    </div>
+
+    <div class="support-intro">
+      <p class="big-quote">"We are on a passionate journey to bring the salvation of Jesus Christ to those that are lost and so dearly loved."</p>
+      <p>See our mission statement to learn more about what drives us.</p>
+      <button class="mission-btn" onclick="showPage('mission', document.querySelectorAll('.nav-btn')[0])">Our Mission</button>
+    </div>
+
+    <div class="support-grid">
+
+      <!-- Prayer -->
+      <div class="support-card">
+        <svg class="support-cross-deco" viewBox="0 0 70 90" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <line x1="35" y1="5" x2="35" y2="85" stroke="#1b4d2e" stroke-width="13" stroke-linecap="round"/>
+          <line x1="8" y1="28" x2="62" y2="28" stroke="#1b4d2e" stroke-width="13" stroke-linecap="round"/>
+        </svg>
+        <div class="card-label">Prayer</div>
+        <h3>The Most Powerful Way to Support</h3>
+        <p>The most powerful way you can support this ministry is through prayer. We ask that you stand with us in spirit as we head into the harvest field. Please pray for our safety and physical protection as we travel and minister. Above all, pray that the hearts of those we encounter would be softened and that the transformative love of the Father would be made known to everyone we share with. We believe that through prayer, the way is prepared for the Holy Spirit to move.</p>
+        <blockquote>"And pray for us, too, that God may open a door for our message, so that we may proclaim the mystery of Christ." — Colossians 4:3</blockquote>
+      </div>
+
+      <!-- Bibles -->
+      <div class="support-card">
+        <svg class="support-cross-deco" viewBox="0 0 70 90" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <line x1="35" y1="5" x2="35" y2="85" stroke="#1b4d2e" stroke-width="13" stroke-linecap="round"/>
+          <line x1="8" y1="28" x2="62" y2="28" stroke="#1b4d2e" stroke-width="13" stroke-linecap="round"/>
+        </svg>
+        <div class="card-label">Bibles</div>
+        <h3>Leave Someone With the Word of God</h3>
+        <p>A lasting way to impact a life is to leave someone with the Word of God. If you are a church or organization with extra Bibles, we would be honored to get them into the hands of the community. As we foster relationships with the lost children of God, providing them with their own copy of the Scriptures allows the seeds we plant to grow long after we've moved on.</p>
+      </div>
+
+      <!-- Financial -->
+      <div class="support-card">
+        <svg class="support-cross-deco" viewBox="0 0 70 90" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <line x1="35" y1="5" x2="35" y2="85" stroke="#1b4d2e" stroke-width="13" stroke-linecap="round"/>
+          <line x1="8" y1="28" x2="62" y2="28" stroke="#1b4d2e" stroke-width="13" stroke-linecap="round"/>
+        </svg>
+        <div class="card-label">Financial Partnerships</div>
+        <h3>Generosity That Fuels the Mission</h3>
+        <p>Our mission is made possible by the generosity of people who believe in the Great Commission. If you feel led to support our work through a one-time gift or a recurring donation, please Contact Us to learn how you can contribute. Your financial support helps cover outreach supplies, travel, and resources for those we serve.</p>
+        <button class="mission-btn" onclick="showPage('contact', null)">Contact Us</button>
+      </div>
+
+      <!-- Join Our Team — LAST card, as requested -->
+      <div class="support-card">
+        <svg class="support-cross-deco" viewBox="0 0 70 90" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <line x1="35" y1="5" x2="35" y2="85" stroke="#1b4d2e" stroke-width="13" stroke-linecap="round"/>
+          <line x1="8" y1="28" x2="62" y2="28" stroke="#1b4d2e" stroke-width="13" stroke-linecap="round"/>
+        </svg>
+        <div class="card-label">Join Our Team</div>
+        <h3>A Burning Passion for Evangelism</h3>
+        <p>Are you a devout Christian with a burning passion for evangelism? We are always looking for brothers and sisters to labor alongside us. If you feel called to share the Gospel and want to join us on this journey to reach the lost, we would love to meet you. Come be a part of what God is doing in our community!</p>
+        <button class="mission-btn" onclick="showPage('contact', null)">Get In Touch</button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══ CONTACT ══ -->
+  <section id="contact" class="page">
+    <div class="section-header">
+      <h2>Contact Us</h2>
+      <span class="underline"></span>
+    </div>
+    <div class="contact-hero">
+      <p>We would love to hear from you! Whether you want to partner with us, join our team, donate Bibles, or simply learn more — please don't hesitate to reach out. We are real people with a real mission and we'd love to connect.</p>
+    </div>
+    <div class="contact-cards">
+      <div class="contact-card">
+        <!-- Inline envelope icon -->
+        <svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" aria-label="Email">
+          <rect x="4" y="10" width="32" height="22" rx="4" fill="none" stroke="#2e7d32" stroke-width="2.5"/>
+          <polyline points="4,10 20,24 36,10" fill="none" stroke="#2e7d32" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <h3>Email</h3>
+        <a href="mailto:feedmysheep.official@gmail.com">feedmysheep.official@gmail.com</a>
+        <p>We'll get back to you as soon as we can!</p>
+      </div>
+      <div class="contact-card">
+        <!-- Inline phone icon -->
+        <svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" aria-label="Phone">
+          <path d="M8 6h6l3 8-3.5 3.5c2 4 5 7 9 9L26 23l8 3v6c0 2-2 3-4 2C14 30 8 16 6 10c-1-2 0-4 2-4z" fill="none" stroke="#2e7d32" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <h3>Phone</h3>
+        <a href="tel:7194287040">(719) 428-7040</a>
+        <p>Give us a call anytime!</p>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  Made with faith, hope, and love
+  <svg width="13" height="17" viewBox="0 0 13 17" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <line x1="6.5" y1="2" x2="6.5" y2="15" stroke="#6b8c71" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="2" y1="5.5" x2="11" y2="5.5" stroke="#6b8c71" stroke-width="2.5" stroke-linecap="round"/>
+  </svg>
+  Feed My Sheep Ministry &nbsp;&middot;&nbsp; feedmysheep.official@gmail.com &nbsp;&middot;&nbsp; (719) 428-7040
+</footer>
+
+<script>
+function showPage(id, btn) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  if (btn) btn.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  if (id === 'roadmap') setTimeout(drawRoadPath, 60);
+}
+
+function drawRoadPath() {
+  const wrap = document.getElementById('roadmapWrap');
+  const svgWrap = document.getElementById('svgWrap');
+  svgWrap.innerHTML = '';
+
+  const steps = document.querySelectorAll('#stepsList .step');
+  if (!steps.length) return;
+
+  const wrapRect = wrap.getBoundingClientRect();
+  const totalH = wrap.offsetHeight;
+
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.setAttribute('viewBox', `0 0 60 ${totalH}`);
+  svg.style.cssText = `width:60px;height:${totalH}px;`;
+
+  const points = [];
+  steps.forEach(step => {
+    const r = step.getBoundingClientRect();
+    points.push(r.top - wrapRect.top + r.height / 2);
+  });
+
+  const cx = 30;
+  let d = `M ${cx} ${points[0]}`;
+  for (let i = 0; i < points.length - 1; i++) {
+    const mid = (points[i] + points[i + 1]) / 2;
+    d += ` C ${cx} ${mid}, ${cx} ${mid}, ${cx} ${points[i + 1]}`;
+  }
+
+  const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  path.setAttribute('d', d);
+  path.setAttribute('fill', 'none');
+  path.setAttribute('stroke', '#43a047');
+  path.setAttribute('stroke-width', '3');
+  path.setAttribute('stroke-linecap', 'round');
+  path.setAttribute('stroke-dasharray', '6 5');
+  path.setAttribute('opacity', '0.6');
+  svg.appendChild(path);
+
+  points.forEach(y => {
+    const c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    c.setAttribute('cx', cx);
+    c.setAttribute('cy', y);
+    c.setAttribute('r', '5');
+    c.setAttribute('fill', '#2e7d32');
+    c.setAttribute('stroke', 'white');
+    c.setAttribute('stroke-width', '2');
+    svg.appendChild(c);
+  });
+
+  svgWrap.appendChild(svg);
+}
+
+window.addEventListener('resize', () => {
+  if (document.getElementById('roadmap').classList.contains('active')) drawRoadPath();
+});
+</script>
+</body>
+</html>
